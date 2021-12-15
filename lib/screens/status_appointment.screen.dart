@@ -15,7 +15,7 @@ class StatusAppointmentScreen extends StatefulWidget {
 }
 
 class _StatusAppointmentScreenState extends State<StatusAppointmentScreen> {
-  final urlImage = 'images/QRCODE.png';
+  final urlImage = 'images/data1.png';
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +87,7 @@ class _StatusAppointmentScreenState extends State<StatusAppointmentScreen> {
             Expanded(
               flex: 1,
               child: Container(
-                height: 720,
+                height: 750,
                 decoration: BoxDecoration(
                   border: Border.all(width: 5, color: Color(0xFFFF922E)),
                   color: Color(0xFF00A3FF),
@@ -248,8 +248,8 @@ class _StatusAppointmentScreenState extends State<StatusAppointmentScreen> {
                     ),
                     Image.asset(
                       urlImage,
-                      height: 150,
-                      width: 150,
+                      height: 175,
+                      width: 175,
                     ),
                     SizedBox(
                       height: 10,

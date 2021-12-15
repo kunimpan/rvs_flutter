@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-List<ReportCovid19> reportCovid19FromJson(String str) => List<ReportCovid19>.from(json.decode(str).map((x) => ReportCovid19.fromJson(x)));
+ReportCovid19 reportCovid19FromJson(String str) => ReportCovid19.fromJson(json.decode(str));
 
-String reportCovid19ToJson(List<ReportCovid19> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String reportCovid19ToJson(ReportCovid19 data) => json.encode(data.toJson());
 
 class ReportCovid19 {
   ReportCovid19({

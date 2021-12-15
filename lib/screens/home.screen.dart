@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rvs_flutter/screens/signup.srceen.dart';
@@ -21,13 +23,51 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
+  // List<ReportCovid19>? _dataFromWebAPI;
+
+  final urlImage = 'images/pun_mini.png';
+  var jsonData;
+  // Map<String, int> data = {};
+  late Future<dynamic> futureAlbum;
   ReportCovid19? _dataFromAPI;
+
+
+  
 
   @override
   void initState(){
+
+    super.initState();
     getReportCovid19();
+
+    // futureAlbum = fetchAlbum();
   }
-  final urlImage = 'images/pun_mini.png';
+
+  // Future <void> getReportCovid19() async {
+  //     var url = "https://covid19.ddc.moph.go.th/api/Cases/today-cases-all";
+  //     var response = await http.get(Uri.parse(url));
+  //     jsonData = jsonDecode(utf8.decode(response.bodyBytes));
+  //
+  //     // data['new_case'] = jsonData['new_case'];
+  //     // data['new_death'] = jsonData['new_death'];
+  //
+  //     // print(response.body);
+  //     print(jsonDecode);
+  //   }
+
+
+
+  // Future<dynamic> fetchAlbum() async {
+  //   final response =
+  //   await http.get(Uri.parse('https://covid19.ddc.moph.go.th/api/Cases/today-cases-all'));
+  //
+  //   print(response.body);
+  //   if (response.statusCode == 200) {
+  //     return jsonDecode(response.body);
+  //   } else {
+  //     throw Exception('Failed to load album');
+  //   }
+  // }
   // int index = 1;
   //
   // final pages = <Widget>[
@@ -39,9 +79,18 @@ class _HomeScreenState extends State<HomeScreen> {
     var url = "https://covid19.ddc.moph.go.th/api/Cases/today-cases-all";
     var response = await http.get(Uri.parse(url));
 
-    _dataFromAPI = reportCovid19FromJson(response.body) as ReportCovid19?;
-    // print(response.body);
+
+    // _dataFromAPI = reportCovid19FromJson(response.body) as ReportCovid19?;
+    print(response.body);
+    setState(() {
+      _dataFromAPI = reportCovid19FromJson(response.body);
+    });
+
+    // return ReportCovid19.fromJson(_dataFromAPI);
+
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -227,7 +276,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'รักษาหาย\n6,700',
+                      // 'รักษาหาย\n${_dataFromAPI?.newCase}',
+                      'รักษาหาย\n1,200',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -340,6 +390,39 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
+
+  Widget _test() {
+    return Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+              color: Colors.lightBlueAccent,
+              borderRadius: BorderRadius.circular(15)),
+          height: 80,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                flex: 10,
+                child: Text(
+                  'ยอดผู้ติดเชื้อสะสม\n563,500 ราย',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              )
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+  
+  
 
   // void onChangedTab(int index){
   //   setState(() {
